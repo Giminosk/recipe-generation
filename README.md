@@ -13,3 +13,7 @@ Basing on Eat-PIM generated embeddings, the input user's ingredients would resul
 - Generate a set of the most applicable actions for these ingredients
 - Create a FlowGraph from these ingredients and actions
 - Generate textual recipe based on the FlowGraph
+
+## Resources
+
+- [Eat-PIM source code](https://github.com/boschresearch/EaT-PIM/tree/main)
