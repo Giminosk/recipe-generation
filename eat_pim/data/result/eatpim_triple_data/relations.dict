@@ -1,0 +1,337 @@
+0	pred close
+1	pred fit
+2	pred chill
+3	pred finish
+4	pred sear
+5	pred fill
+6	pred hollow out
+7	pred line up
+8	pred rest
+9	pred beat
+10	pred scramble
+11	pred absorb
+12	pred toast
+13	pred return
+14	pred hold
+15	pred cut
+16	pred release
+17	pred escape
+18	pred trim
+19	pred steam
+20	pred good
+21	pred lay
+22	pred pat
+23	pred combine
+24	pred substitute
+25	pred wish
+26	pred slide
+27	pred create
+28	pred protect
+29	pred reach
+30	pred peel
+31	pred dissolve
+32	pred yield
+33	pred whirl
+34	pred crack
+35	pred look
+36	pred blot
+37	pred adjust
+38	pred halve
+39	pred cut off
+40	pred allow
+41	pred lift
+42	pred stir up
+43	pred puncture
+44	pred unwrap
+45	pred scrub
+46	pred scrape out
+47	pred change up
+48	pred level off
+49	pred accord
+50	pred roast
+51	pred accompany
+52	pred break down
+53	pred depend
+54	pred poke
+55	pred bubbly
+56	pred wash
+57	pred blend
+58	pred drizzle over
+59	pred grease
+60	pred prefer
+61	pred heat
+62	pred set
+63	pred stick
+64	pred brush
+65	pred transport
+66	pred cling
+67	pred shred
+68	pred have
+69	pred dice
+70	pred drip
+71	pred rotate
+72	pred seperate
+73	pred roll
+74	pred rinse
+75	pred enjoy
+76	pred wait
+77	pred top
+78	pred repeat
+79	pred rise
+80	pred mound
+81	pred discard
+82	pred assemble
+83	pred attach
+84	pred soak
+85	pred flip
+86	pred cover
+87	pred shape
+88	pred need
+89	pred appear
+90	pred press
+91	pred pour on
+92	pred omit
+93	pred melt out
+94	pred empty
+95	pred parboil
+96	pred turn off
+97	pred uncover
+98	pred come out
+99	pred cut up
+100	pred begin
+101	pred split
+102	pred marinate
+103	pred turn over
+104	pred retain
+105	pred pour in
+106	pred clean
+107	pred test
+108	pred pack
+109	http://www.w3.org/2000/01/rdf-schema#subClassOf
+110	pred form
+111	pred soften
+112	pred leave
+113	pred cool
+114	pred turn down
+115	pred chop
+116	pred until
+117	pred insert
+118	pred skim
+119	pred drop
+120	pred pour over
+121	pred add
+122	pred loosen
+123	pred prepare
+124	pred refridgerate
+125	pred fold up
+126	pred bake
+127	pred unroll
+128	pred salt
+129	pred whisk in
+130	pred brush over
+131	pred work
+132	pred fool
+133	pred give
+134	pred drain off
+135	pred wipe
+136	pred for
+137	pred help
+138	pred soak up
+139	pred fluff
+140	pred boil
+141	pred store
+142	pred pop
+143	pred refrigerate
+144	pred mix in
+145	pred toss
+146	pred ventilate
+147	pred touch
+148	pred put
+149	pred season
+150	pred pipe
+151	pred taste
+152	pred stuff
+153	pred top off
+154	pred pinch
+155	pred water
+156	pred chop up
+157	pred bubble
+158	pred screw on
+159	pred turn
+160	pred make
+161	pred flake
+162	pred scrape up
+163	pred mix
+164	pred whisk
+165	pred pat dry
+166	pred stand
+167	pred toss on
+168	pred run
+169	pred sprinkle
+170	pred want
+171	pred start
+172	pred tent
+173	pred place on
+174	pred spoon over
+175	pred spread out
+176	pred re
+177	RECIPE OUTPUT
+178	pred reserve
+179	pred resemble
+180	pred spear
+181	pred squeeze
+182	pred pour
+183	pred marinade
+184	pred grill
+185	pred broil
+186	pred expose
+187	pred feel
+188	pred preheat
+189	pred place
+190	pred scoop out
+191	pred strain
+192	pred know
+193	pred find
+194	pred boil over
+195	pred thicken
+196	pred liberally
+197	pred shake off
+198	pred beat in
+199	pred scatter
+200	pred break
+201	pred shake
+202	pred try
+203	pred serve
+204	pred sprinkle over
+205	pred fry
+206	pred stir
+207	pred raise
+208	pred save
+209	pred hour
+210	pred reduce
+211	pred dive
+212	pred coat
+213	pred crush
+214	pred swirl
+215	pred like
+216	pred mash
+217	pred go
+218	pred blanch
+219	pred sift
+220	pred maintain
+221	pred cook through
+222	pred roll out
+223	pred line
+224	pred divulge
+225	pred process
+226	pred mince
+227	pred layer
+228	pred pat down
+229	pred remove
+230	pred incorporate
+231	pred pre
+232	pred fleck
+233	pred dredge
+234	pred ensure
+235	pred dry
+236	pred yeast
+237	pred eat
+238	pred cut back
+239	pred crumble
+240	pred correct
+241	pred switch on
+242	pred puree
+243	pred transfer
+244	pred face
+245	pred warm
+246	pred minute
+247	pred remaininig
+248	pred microwave
+249	pred place up
+250	pred distribute
+251	pred ladle
+252	pred bend
+253	pred wre out
+254	pred act
+255	pred invert
+256	pred cook
+257	pred wrap
+258	pred space
+259	pred thaw
+260	pred mix up
+261	pred turn out
+262	pred scrape
+263	pred suite
+264	pred fold
+265	pred deglaze
+266	pred do
+267	pred watch
+268	pred divide
+269	hasNode
+270	pred pierce
+271	pred core
+272	pred cream
+273	pred continue
+274	pred bring down
+275	pred come
+276	pred brown
+277	pred buy
+278	pred skim off
+279	pred pulse
+280	pred bring
+281	pred griddle
+282	pred moisten
+283	pred break up
+284	pred thenpour
+285	http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+286	pred spoon
+287	pred get
+288	pred baste
+289	pred tilt
+290	pred much
+291	pred simmer
+292	pred seal
+293	pred stir in
+294	pred hot
+295	pred become
+296	pred keep
+297	pred add in
+298	pred tuck
+299	pred disolve
+300	pred open
+301	pred crisp
+302	pred rub
+303	pred measure
+304	pred dip
+305	pred freeze
+306	pred sir
+307	pred garnish
+308	pred drain
+309	pred spread
+310	pred flatten
+311	pred saute
+312	pred thin
+313	pred melt
+314	pred pull
+315	pred lay out
+316	pred butter
+317	pred drizzle
+318	pred wisk
+319	pred spray
+320	pred prick
+321	pred snipe off
+322	pred disappear
+323	pred smother
+324	pred sit
+325	pred relax
+326	pred smear
+327	pred pound
+328	pred slice
+329	pred dust
+330	pred bowl
+331	pred call
+332	pred arrange
+333	pred saut
+334	pred separate
+335	pred tie
+336	pred knead

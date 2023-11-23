@@ -1,0 +1,29 @@
+How to create embeddings:
+
+    - put RAW_recipes.csv in eat_pim/data
+
+    - export PYTHONPATH=$PYTHONPATH:./eat_pim/eatpim
+
+    # parse documents. if n_recipes = -1 then all recipes (230,000) would be parsed. eat_pim/data/result/parsed_recipes.pkl are results
+    - python eat_pim/eatpim/etl/parse_documents.py --output_dir result --n_recipes 300
+
+    # make connections between names and entities from FoodOn/Wikidata. eat_pim/data/result/{ingredient_list.json and word_cleanup_linking.json} are results
+    - python eat_pim/eatpim/etl/preprocess_unique_names_and_linking.py --input_dir result
+
+    # convert the parsed recipe data into flowgraphs. eat_pim/data/result/{entity_relations.json and recipe_tree_data.json} are results
+    - python eat_pim/eatpim/etl/transform_parse_results.py --input_dir result --n_cpu 6
+
+    # some additional transformations on the flow graph data. eat_pim/data/DIRNAME/triple_data folder is result
+    - python eat_pim/eatpim/etl/eatpim_reformat_flowgraph_parse_results.py --input_dir result
+
+    # train embedding code, to learn embeddings for entities and relations. eat_pim/data/result/models/result_model folder is result
+    - python eat_pim/eatpim/embeddings/codes/run.py --do_train --cuda --data_path result --model TransE -n 256 -b 2048 \
+         --train_triples_every_n 100 -d 200 -g 24.0 -a 1.0 -lr 0.001 --max_steps 20000 -save models/result_model \
+         --test_batch_size 4 -adv -cpu 1 --warm_up_steps 1500 --save_checkpoint_steps 5000 --log_steps 5000
+
+
+
+
+How to use embeddings for graph drawing and substitutions:
+
+    - python eat_pim/eatpim/rank_subs_in_recipe.py --data_dir result --model_dir models/result_model
