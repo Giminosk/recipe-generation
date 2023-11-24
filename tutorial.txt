@@ -19,7 +19,7 @@ How to create embeddings:
     # train embedding code, to learn embeddings for entities and relations. eat_pim/data/result/models/result_model folder is result
     - python eat_pim/eatpim/embeddings/codes/run.py --do_train --cuda --data_path result --model TransE -n 256 -b 2048 \
          --train_triples_every_n 100 -d 200 -g 24.0 -a 1.0 -lr 0.001 --max_steps 20000 -save models/result_model \
-         --test_batch_size 4 -adv -cpu 1 --warm_up_steps 1500 --save_checkpoint_steps 5000 --log_steps 5000
+         --test_batch_size 4 -adv -cpu 1 --warm_up_steps 1500 --save_checkpoint_steps 5000 --log_steps 
 
 
 
