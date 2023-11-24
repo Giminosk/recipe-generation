@@ -277,7 +277,7 @@ def main(
         "top 10 cosine similarity of ingredient-coocurrences, only considering ingredients in the target recipe: "
     )
     for i in top_sims2[:10]:
-        # print(index_to_ing[i], t2sim[i])
+        print(index_to_ing[i], t2sim[i])
         if i + 1 == len(t2sim):
             break
 
@@ -403,6 +403,8 @@ def content_to_ids(input_dict):
 
 
 def compute_ing_cooc_matrix(all_ingredients_list, recipe_leafs, leaf_ocurrence_count):
+    # print('HERE')
+    # print(all_ingredients_list, leaf_ocurrence_count)
     print("processing to compute ingredient co-occurence counts")
     ing_to_index = {}
     index_to_total_occ_count = []
