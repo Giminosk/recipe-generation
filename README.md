@@ -10,6 +10,7 @@ Basing on Eat-PIM generated embeddings, the input user's ingredients would resul
 
 - Parse provided ingredients
 - Match infringements with Foodon and Wikidata entities
+- Choose most relevant ingridients
 - Generate a set of the most applicable actions for these ingredients
 - Create a FlowGraph from these ingredients and actions
 - Generate textual recipe based on the FlowGraph
