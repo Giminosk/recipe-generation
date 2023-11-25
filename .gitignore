@@ -72,10 +72,13 @@ target/
 app.log
 .idea
 
-RAW_recipes.csv
 .venv
 .ruff_cache
 
 *.exe
 
 chache/
+
+RAW_recipes.csv
+
+src/data/*
