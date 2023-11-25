@@ -37,7 +37,7 @@ def parse_flow_graphs():
         pickle.dump(data, pickle_file)
 
 
-def parse_embeddings():
+def parse_entities_embeddings():
     with open(
         os.path.join(old_data_path, "eatpim_triple_data/entities.dict"), "r"
     ) as file:
@@ -101,6 +101,33 @@ def parse_embeddings():
         pickle.dump(data, pickle_file)
 
 
+def parse_actions():
+    with open(
+        os.path.join(old_data_path, "eatpim_triple_data/relations.dict"), "r"
+    ) as file:
+        data = {}
+        for line in file:
+            parts = line.strip().split("\t")
+            if len(parts) == 2:
+                key, value = parts
+                data[key] = value
+        data = list(data.values())
+
+    data = [i.replace("pred ", "") for i in data]
+
+    embeddings = np.load(
+        os.path.join(old_data_path, "models/result_model/relation_embedding.npy")
+    )
+
+    assert len(data) == embeddings.shape[0]
+    data = {"actions": data, "embeddings": embeddings}
+
+    with open(
+        os.path.join(new_data_path, "actions_embeddings.pkl"), "wb"
+    ) as pickle_file:
+        pickle.dump(data, pickle_file)
+
+
 def parse_cooc():
     with open(os.path.join(old_data_path, "ing_occ_data.pkl"), "rb") as file:
         data = pickle.load(file)
@@ -130,18 +157,17 @@ def parse_cooc():
 def main():
     parse_matches()
     parse_flow_graphs()
-    parse_embeddings()
+    parse_entities_embeddings()
+    parse_actions()
     parse_cooc()
 
 
 if __name__ == "__main__":
-    folder_path = "data"
-
     # Delete the folder and its contents if it exists
-    if os.path.exists(folder_path):
-        shutil.rmtree(folder_path)
+    if os.path.exists(new_data_path):
+        shutil.rmtree(new_data_path)
 
     # Create the folder
-    os.makedirs(folder_path)
+    os.makedirs(new_data_path)
 
     main()
