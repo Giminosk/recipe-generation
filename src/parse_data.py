@@ -4,40 +4,55 @@ import pickle
 import numpy as np
 import shutil
 
+from config import config
 
-old_data_path = "eat_pim/data/result/"
-new_data_path = "src/data/"
+
+old_data_path = config.OLD_DATA_PATH
+new_data_path = config.NEW_DATA_PATH
 
 
 def parse_matches():
+    """
+    Parses matches of ingredients and actions with FOODON and WIKIDATA entities.
+    Createds 2 files with dicts which keys are ingredients/actions and values are lists with (almost always) one entity
+    """
     with open(
         os.path.join(old_data_path, "word_cleanup_linking.json"), "r"
     ) as json_file:
         data = json.load(json_file)
 
-    with open(
-        os.path.join(new_data_path, "full_short_ingridients_matches.pkl"), "wb"
-    ) as pickle_file:
+    with open(os.path.join(new_data_path, config.FULL_SHORT_FILE), "wb") as pickle_file:
         pickle.dump(data["ing_to_ing"], pickle_file)
 
     foodon_matches = data["ing_to_foodon"].copy()
     foodon_matches.update(data["obj_to_foodon"])
-    with open(os.path.join(new_data_path, "foodon_matches.pkl"), "wb") as pickle_file:
+    with open(
+        os.path.join(new_data_path, config.FOODON_MATCHES_FILE), "wb"
+    ) as pickle_file:
         pickle.dump(foodon_matches, pickle_file)
 
-    with open(os.path.join(new_data_path, "wikidata_matches.pkl"), "wb") as pickle_file:
+    with open(
+        os.path.join(new_data_path, config.WIKIDATA_MATCHES_FILE), "wb"
+    ) as pickle_file:
         pickle.dump(data["verb_to_preparations"], pickle_file)
 
 
 def parse_flow_graphs():
+    """
+    Parses flow graphs
+    """
     with open(os.path.join(old_data_path, "recipe_tree_data.json"), "r") as json_file:
         data = json.load(json_file)
 
-    with open(os.path.join(new_data_path, "flow_graphs.pkl"), "wb") as pickle_file:
+    with open(os.path.join(new_data_path, config.FLOW_GRAPS_FILE), "wb") as pickle_file:
         pickle.dump(data, pickle_file)
 
 
 def parse_entities_embeddings():
+    """
+    Parses ingredients and their entities embeddings. (ingridient and its FOODON match have different embeddings is separate spaces).
+    Create 2 files, each with list of ingredients/entities and np matrix with embeddings
+    """
     with open(
         os.path.join(old_data_path, "eatpim_triple_data/entities.dict"), "r"
     ) as file:
@@ -82,7 +97,7 @@ def parse_entities_embeddings():
         "cosine_matrix": cosine_sim_matrix,
     }
     with open(
-        os.path.join(new_data_path, "ingridients_embeddings.pkl"), "wb"
+        os.path.join(new_data_path, config.INGREDIENTS_EMBEDDINGS_FILE), "wb"
     ) as pickle_file:
         pickle.dump(data, pickle_file)
 
@@ -96,12 +111,15 @@ def parse_entities_embeddings():
         "cosine_matrix": cosine_sim_matrix,
     }
     with open(
-        os.path.join(new_data_path, "foodon_entities_embeddings.pkl"), "wb"
+        os.path.join(new_data_path, config.FOODON_ENTITIES_EMBEDDINGS_FILE), "wb"
     ) as pickle_file:
         pickle.dump(data, pickle_file)
 
 
-def parse_actions():
+def parse_actions_embeddings():
+    """
+    Parses actions embeddings. Create a file with list of actions and np matrix of embeddings
+    """
     with open(
         os.path.join(old_data_path, "eatpim_triple_data/relations.dict"), "r"
     ) as file:
@@ -123,16 +141,19 @@ def parse_actions():
     data = {"actions": data, "embeddings": embeddings}
 
     with open(
-        os.path.join(new_data_path, "actions_embeddings.pkl"), "wb"
+        os.path.join(new_data_path, config.ACTIONS_EMBEDDING_FILE), "wb"
     ) as pickle_file:
         pickle.dump(data, pickle_file)
 
 
 def parse_cooc():
+    """
+    Parses co-occurencies. Create file with cooc matrix and similarity matrix
+    """
     with open(os.path.join(old_data_path, "ing_occ_data.pkl"), "rb") as file:
         data = pickle.load(file)
 
-    ingridients = list(data["ing_to_index"].keys())
+    ingredients = list(data["ing_to_index"].keys())
     co_occurrence_matrix = data["ing_cooc_matrix"].toarray()
 
     epsilon = 1e-8
@@ -145,12 +166,18 @@ def parse_cooc():
     )
 
     assert (
-        (len(ingridients), len(ingridients))
+        (len(ingredients), len(ingredients))
         == co_occurrence_matrix.shape
         == cosine_sim_matrix.shape
     )
 
-    with open(os.path.join(new_data_path, "ingridients_cooc.pkl"), "wb") as pickle_file:
+    data = {
+        "ing_to_index": data["ing_to_index"],
+        "ing_cooc_matrix": data["ing_cooc_matrix"],
+    }
+    data["sim_matrix"] = cosine_sim_matrix
+
+    with open(os.path.join(new_data_path, config.COOC_FILE), "wb") as pickle_file:
         pickle.dump(data, pickle_file)
 
 
@@ -158,16 +185,25 @@ def main():
     parse_matches()
     parse_flow_graphs()
     parse_entities_embeddings()
-    parse_actions()
+    parse_actions_embeddings()
     parse_cooc()
 
 
 if __name__ == "__main__":
-    # Delete the folder and its contents if it exists
-    if os.path.exists(new_data_path):
-        shutil.rmtree(new_data_path)
-
-    # Create the folder
-    os.makedirs(new_data_path)
+    if os.path.exists(new_data_path) and os.path.isdir(new_data_path):
+        for file in os.listdir(new_data_path):
+            file_path = os.path.join(new_data_path, file)
+            if file != config.INGREDIENTS_FILE:
+                try:
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
+                    elif os.path.isdir(file_path):
+                        shutil.rmtree(file_path)
+                    print(f"Deleted: {file}")
+                except Exception as e:
+                    print(f"Error deleting {file}: {str(e)}")
+    else:
+        print(f"The folder '{new_data_path}' does not exist. Creating ...")
+        os.makedirs(new_data_path)
 
     main()
