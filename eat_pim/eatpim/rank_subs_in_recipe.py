@@ -250,6 +250,7 @@ def main(
     )
     # print(graphs)
     target_recipe_graph = graphs[target_recipe_output]
+    # print(target_recipe_output, target_recipe_graph)
     simple_visualize(target_recipe_graph)
 
     t1sim = get_ing_cooc_cosine_sims(

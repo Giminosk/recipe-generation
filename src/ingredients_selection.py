@@ -37,7 +37,9 @@ class IngredientSelector:
             if ing in self.cooc["ing_to_index"]:
                 existing_ingredients.append(ing)
             else:
-                short_ing = self.full_short_matches.get(ing, None)[0]
+                short_ing = self.full_short_matches.get(ing, None)
+                if short_ing:
+                    short_ing = short_ing[0]
                 if short_ing is not None and short_ing in self.cooc["ing_to_index"]:
                     existing_ingredients.append(short_ing)
         return existing_ingredients

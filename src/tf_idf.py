@@ -16,14 +16,12 @@ class TfIdf:
 
     def __init__(self, csv_path):
         self.csv_path = csv_path
+        self.connecter = lambda x: ". ".join(ast.literal_eval(x))
         self.vectorizer = self.__get_vectorizer()
         self.existing_ids = self.__get_existing_ids()
 
     def process(self):
         df = pd.read_csv(self.csv_path)
-
-        def connecter(x):
-            return ". ".join(ast.literal_eval(x))
 
         ids = []
         corpus = []
@@ -32,7 +30,8 @@ class TfIdf:
             row = df.loc[i]
             if row.id in self.existing_ids:
                 ids.append(row.id)
-                corpus.append(connecter(row.steps))
+                # corpus.append(self.connecter(row.steps))
+                corpus.append(self.connecter(row.ingredients))
 
         tfidf_matrix = self.vectorizer.fit_transform(corpus)
 
