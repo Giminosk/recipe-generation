@@ -11,6 +11,7 @@ class Config:
     INGREDIENTS_EMBEDDINGS_FILE: str = "ingredients_embeddings.pkl"
     FOODON_ENTITIES_EMBEDDINGS_FILE: str = "foodon_entities_embeddings.pkl"
     ACTIONS_EMBEDDING_FILE: str = "actions_embeddings.pkl"
+    TFIDF_FILE = "tfidf.pkl"
 
     MIN_INGREDIENTS: int = 5
 

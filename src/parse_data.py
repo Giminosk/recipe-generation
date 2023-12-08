@@ -7,6 +7,10 @@ from config import config
 
 
 class DataParser:
+    """
+    Parse all filed created by eatpim code, select needed, reformat structure, make addidtional calculations.
+    """
+
     def __init__(self):
         self.old_data_path = config.OLD_DATA_PATH
         self.new_data_path = config.NEW_DATA_PATH

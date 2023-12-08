@@ -6,6 +6,10 @@ from config import config
 
 
 class IngredientSelector:
+    """
+    Select most valueble ingredients from set of ingredients.
+    """
+
     def __init__(self):
         self.data_path = config.NEW_DATA_PATH
         self.load_data()
