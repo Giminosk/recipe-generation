@@ -51,18 +51,26 @@ class Checker:
 
     @staticmethod
     def simple_visualize(G):
-        pos = nx.nx_pydot.graphviz_layout(G, prog="dot")  # dot or neato format
-        plt.figure(1, figsize=(11, 11))
+        pos = nx.nx_pydot.graphviz_layout(G, prog="dot")
+        plt.figure(1, figsize=(21, 11))
 
         nx.draw_networkx(G, pos, node_size=2000)
         node_labels = {}
         for n in G.nodes():
-            if n[:5] == "pred_":
-                node_labels[n] = n.split("_")[1]
-            else:
-                node_labels[n] = n
+            node_labels[n] = n
+            # if n[:5] == "pred_":
+            #     # print(n)
+            #     # print(n.split("_")[1])
+            #     node_labels[n] = "_".join(n.split("_")[1:])
+            # else:
+            #     print("HERE")
+            #     print(n)
+            # node_labels[n] = n
+        # print("HERE")
+        print(node_labels)
         nx.draw_networkx_labels(G, pos, labels=node_labels)
-        plt.show()
+        plt.savefig(f"./src/plots/graph_from_dataset.png", dpi=100)
+        # plt.show()
 
     def __load_data(self):
         with open(os.path.join(config.NEW_DATA_PATH, config.TFIDF_FILE), "rb") as file:
