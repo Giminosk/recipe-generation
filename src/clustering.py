@@ -52,7 +52,7 @@ embeddings = scaler.fit_transform(embeddings)
 # for i, entity_name in enumerate(ingredients):
 #     plt.annotate(entity_name, (pca_result[i, 0] - 1, pca_result[i, 1]))
 
-# plt.title("PCA Visualization of ingridients using mixed embeddings", fontsize=15)
+# plt.title("PCA Visualization of ingredients using mixed embeddings", fontsize=15)
 # plt.show()
 # plt.savefig("./src/plots/pca.png", dpi=300)
 
