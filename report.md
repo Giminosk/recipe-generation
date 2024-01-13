@@ -9,7 +9,7 @@
 
 The goal is to introduce a model that would be capable of generating new recipes based on a user's input ingredients. 
 
-Basing on Eat-PIM and FlavorGraph generated embeddings, the input user's ingredients would result in a FlowGraph, presenting the recipe proposed by the model.
+Based on Eat-PIM and FlavorGraph generated embeddings, the input user's ingredients would result in a FlowGraph, presenting the recipe proposed by the model.
 
 ## Project source code
 
@@ -60,66 +60,62 @@ Source code to Ingredient Selection can be found here: [Ingredient Selection](ht
 - Calculating the Threshold (determine_threshold): Determine a threshold value for ingredient selection based on their similarity scores in the co-occurrence matrix. The percentile for this threshold is manually adjustable.
 
 - Selecting Ingredients:
-    - Initial Selection Process (select): Begin by selecting the most common ingredient based on the co-occurrence data. Add ingredients to meet a minimum count requirement, ensuring a basic diversity of the selection.
+    - Initial Selection Process (select): Select the most common ingredient based on the co-occurrence data. Add ingredients to meet a minimum count requirement, ensuring a basic selection diversity.
     - Expanding the Selection: Continue adding ingredients based on their similarity scores with already selected ingredients. This process continues until the average similarity score falls below the determined threshold.
 
 #### Example of Selected Ingredients
 
 <img src="src/plots/selected_ingredients.png">
 
-### Step 3 - Generate a set of the most applicable actions for these ingredients
+### Step 3 - Generate a set of the most applicable actions for these ingredients and create a FlowGraph
 
 #### Cluster selected ingredients 
 
 Source code to Clustering can be found here: [Clustering](https://github.com/aksenyuk/recipe-generation/src/clustering.py)
 
-- Apply Elbow method to determine number of clusters:
+- Apply Elbow method to determine the number of clusters:
 
-    - For Eat-PIM embeddings: <img src="src/plots/elbow_eatpim.png">
+    - For Eat-PIM embeddings: 
 
-    Conclusions: No particular Number of clusters (k) can be determined
+    <img src="src/plots/elbow_eatpim.png" height="300">
+    
+    **Conclusions:** No particular Number of clusters (k) can be determined
 
-    - Then, for mix FlavorGraph and EaT-PIM embeddings: <img src="src/plots/elbow_mixed.png">
+    - Then, for mix FlavorGraph and EaT-PIM embeddings: 
 
-    Conclusions: clearly defined k = 4 Number of clusters
+    <img src="src/plots/elbow_mixed.png" height="300">
+    
+    **Conclusions:** clearly defined k = 4 Number of clusters
 
 #### Clusters k=4 visualization for selected ingredients
 
-<img src="src/plots/pca.png">
+<img src="src/plots/pca.png" height="300">
 
 #### Determine actions (One cluster - one action):
 
-- Calculate cosine similarity for ingredient-action embeddings: <img src="src/plots/graph_first_iteration.png">
+- Calculate cosine similarity for ingredient-action embeddings: 
 
-Conclusions: Actions do not make sense: elbow macaroni - burn; ground pork - support, etc. Therefore, cosine similarity cannot be used for these embeddings, due to specification of EaT-PIM embeddings
+<img src="src/plots/graph_first_iteration.png" height="300">
+
+**Conclusions:** Actions do not make sense: elbow macaroni - burn; ground pork - support, etc. Therefore, cosine similarity cannot be used for these embeddings, due to the specification of EaT-PIM embeddings
 
 - Workaround: 
 
-    - By the use of Tf-Idf, process all recipes used in embeddings to find most similar recipes to our set of ingredients: <img src="src/plots/graph_from_dataset.png">
+    - By the use of Tf-Idf, process all recipes used in embeddings to find the most similar recipes to our set of ingredients: 
 
+    <img src="src/plots/graph_from_dataset.png" height="300">
+    
     Source code to Tf-Idf Embeddings can be found here: [Tf-Idf Embeddings](https://github.com/aksenyuk/recipe-generation/src/tf_idf.py)
 
     Source code to Final Recipe Acquisition can be found here: [Final Recipe Acquisition](https://github.com/aksenyuk/recipe-generation/src/checker.py)
 
-    Conclusions: Most similar recipe was determined (RECIPE_OUTPUT_323553)
+    **Conclusions:** The most similar recipe was determined (RECIPE_OUTPUT_323553)
 
-    - Take actions from final recipe and apply them to our ingredients: <img src="src/plots/graph_second_iteration.png">
+    - Take actions from the final recipe and apply them to our ingredients: 
 
-    Conclusions: This way we were able to determine more relevant actions to the set of ingredients: elbow macaroni - cover; ground pork - cook, etc.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <img src="src/plots/graph_second_iteration.png" height="300">
+    
+    **Conclusions:** This way we could determine more relevant actions to the set of ingredients: elbow macaroni - cover; ground pork - cook, etc.
 
 ## Resources
 
